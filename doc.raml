@@ -1,0 +1,317 @@
+#%RAML 1.0
+title: Projet de session INF5190 - Hiver 2023
+baseUri: http://localhost:5000
+mediaType: 
+  - application/json
+  - application/xml
+types:
+  ExistingViolation:
+    properties: 
+      id:
+        type: integer
+        required: true
+      id_poursuite:
+        type: string
+        required: true
+      business_id:
+        type: string
+        required: true
+      date:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      date_jugement:
+        type: string
+        required: true
+      etablissement:
+        type: string
+        required: true
+      montant:
+        type: string
+        required: true
+      properties:
+        type: string
+        required: true
+      ville:
+        type: string
+        required: true
+      statut:
+        type: string
+        required: true
+      date_statut:
+        type: string
+        required: true
+      categorie:
+        type: string
+        required: true
+  NewPlainte:
+    properties: 
+      nom_etablissement:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      ville:
+        type: string
+        required: true
+      date_visite:
+        type: string
+        required: true
+      nom_client:
+        type: string
+        required: true
+      prenom_client:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+  ExistingPlainte:
+    properties:
+      id:
+        type: integer
+        required: true
+      nom_etablissement:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      ville:
+        type: string
+        required: true
+      date_visite:
+        type: string
+        required: true
+      nom_client:
+        type: string
+        required: true
+      prenom_client:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+  NewUtilisateur:
+    properties: 
+      nom_complet:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      liste_etablissements:
+        type: array
+        items:
+          type: string
+        required: true
+      password:
+        type: string
+        required: true
+  ExistingUtilisateur:
+    properties: 
+      id:
+        type: integer
+        required: true
+      nom_complet:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      liste_etablissements:
+        type: array
+        items:
+          type: string
+        required: true
+      password:
+        type: string
+        required: true
+/api:
+  /contrevenants:
+    get:
+      description: Retourne les contrevenants entre les dates passées en paramètre.
+      queryParameters:
+        du:
+          description: La date de début de la recherche
+          type: date
+          required: true
+          example: "2023-01-01"
+        au:
+          description: La date de fin de la recherche
+          type: date
+          required: true
+          example: "2023-04-03"
+      responses:
+        200:
+          description: La liste des contrevenants a été correctement envoyée.
+          body:
+            application/json:
+              type: array
+              items:
+                type: object
+                properties:
+                  nom_etablissement:
+                    type: string
+                  id: 
+                    type: integer
+              example:
+                - nom_etablissement: "MARCHE METRO BEAUBIEN"
+                  _id: 1
+                - nom_etablissement: "PIZZA PIZZA"
+                  _id: 2        
+  /contrevenants-noms:
+    get:
+      description: Obtenir la liste des noms des contrevenants contenu dans la base de données.
+      responses:
+        200:
+          description: La liste des noms des contrevenants a été correctement envoyée.
+          body:
+            application/json:
+              type: array
+              items:
+                type: object
+                properties:
+                  nom_etablissement:
+                    type: string
+              example:
+                - nom_etablissement: "RESTAURANT BASHA"
+                - nom_etablissement: "DOUBLE PIZZA"
+  /contrevenant:
+    /{nom}:
+      get:
+        description: Extraire les données des violations selon le nom d'un établissement
+        uriParameters:
+          nom:
+            description: Le nom de l'établissement qu'on veut obtenir ses violations.
+            type: string
+            required: true
+        responses:
+          200:
+            description: La liste des violations de l'établissement a été correctement envoyée.
+            body:
+              application/json:
+                type: ExistingViolation[]
+  /contrevenants-infractions:
+    get:
+      description: Obtenir la liste des contrevenants en json, triée par leur nombre d'infractions décroissant.
+      responses:
+        200:
+          description: La liste des contrevenants et leur nombre d'infraction a été correctement envoyée.
+          body:
+            application/json:
+              type: array
+              items:
+                type: object
+                properties:
+                  nb_infractions:
+                    type: integer
+                  nom_etablissement:
+                    type: string
+              example:
+                - nb_infractions: 33
+                  nom_etablissement: "RESTAURANT BASHA"
+                - nb_infractions: 30
+                  nom_etablissement: "DOUBLE PIZZA"
+  /contrevenants-infractions-xml:
+    get:
+      description: Obtenir la liste des contrevenants en xml, triée par leur nombre d'infractions décroissant.
+      responses:
+        200:
+          description: La liste des contrevenants et leur nombre d'infraction a été correctement envoyée.
+          body:
+            application/xml:
+              type: string
+              example: |
+                <contrevenants>
+                  <contrevenant>
+                    <nom_etablissement>RESTAURANT BASHA</nom_etablissement>
+                    <nb_infractions>33</nb_infractions>
+                  </contrevenant>
+                  <contrevenant>
+                    <nom_etablissement>DOUBLE PIZZA</nom_etablissement>
+                    <nb_infractions>30</nb_infractions>
+                  </contrevenant>
+                </contrevenants>
+  /contrevenants-infractions-csv:
+    get:
+      description: Obtenir la liste des contrevenants en csv, triée par leur nombre d'infractions décroissant.
+      responses: 
+        200:
+          description: La liste des contrevenants et leur nombre d'infraction a été correctement envoyée.
+          body:
+            application/csv:
+              type: text/plain
+              charset: utf-8
+              example: |
+                nom_etablissement,nb_infractions
+                RESTAURANT BASHA,33
+                DOUBLE PIZZA,30
+  /plainte:
+    post:
+      description: Créer une nouvelle plainte sur un établissement.
+      body:
+        application/json:
+          type: NewPlainte
+          example:
+            nom_etablissement: Subway
+            adresse: 1000 av. Chambéry
+            ville: Mascouche
+            date_visite: 2023-04-10
+            nom: Gagné
+            prenom: Jason
+            description: J'ai vu 2 rats.
+      responses:
+        201:
+          description: La plainte s'est créée avec succès.
+          body:
+            application/json:
+              type: ExistingPlainte
+              example:
+                id: 1
+                nom_etablissement: Subway
+                adresse: 1000 av. Chambéry
+                ville: Mascouche
+                date_visite: 2023-04-10
+                nom: Gagné
+                prenom: Jason
+                description: J'ai vu 2 rats.
+        400:
+          description: La plainte n'a pas pu être crée.
+    /{id}:
+      delete:
+        description: Supprimer completement la plainte, selon l'id spécifié.
+        responses:
+          200:
+            description: La plainte a été supprimée avec succès.
+          404:
+            description: L'identifiant spécifié n'existe pas.
+  /utilisateur:
+    post:
+      description: Ajouter un nouvel utilisateur.
+      body:
+        application/json:
+          type: NewUtilisateur
+          example:
+            nom_complet: Jason Gagne
+            email: jason.gagne@gmail.com
+            liste_etablissements: ["Subway", "Basha", "Pizza Pizza"]
+      responses:
+        201:
+          description: L'utilisateur fut crée avec succès.
+          body:
+            application/json:
+              type: ExistingUtilisateur
+              example:
+                id: 1
+                nom_complet: Jason Gagne
+                email: jason.gagne@gmail.com
+                liste_etablissements: ["Subway", "Basha", "Pizza Pizza"]
+        400:
+          description: L'utilisateur ne fut pas crée.

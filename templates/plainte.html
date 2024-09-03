@@ -1,0 +1,62 @@
+{% extends "layout.html" %} {% block content %}
+<div class="second-banner" id="banner-plainte">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="top-text header-text">
+          <h2>FORMULAIRE DE PLAINTE</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="formulaire-plainte">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <form name="plainte" action="/send" onsubmit="return sendPlainte()" method="post">
+          <div>
+            <label for="etablissement">Veuillez entrer le nom de l'établissement:</label><br>
+            <input type="text" name="nom_etablissement" id="etablissement" size="50"><br>
+            <span class="msg-err" id="errEtablissement"></span>
+          </div>
+          <div>
+            <label for="adresse"> Veuillez entrer l'adresse:</label><br>
+            <input type="text" name="adresse" id="adresse" size="50"><br>
+            <span class="msg-err" id="errAdresse"></span>
+          </div>
+          <div>
+            <label for="ville"> Veuillez entrer la ville:</label><br>
+            <input type="text" name="ville" id="ville" size="50"><br>
+            <span class="msg-err" id="errVille"></span>
+          </div>
+          <div>
+            <label for="date-visite">Veuillez entrer la date de votre dernière visite:</label><br>
+            <input type="text" name="date_visite" id="date-visite" size="50"><br>
+            <span class="msg-err" id="errDate"></span>
+          </div>
+          <div>
+            <label for="nom">Veuillez entrer votre nom:</label><br>
+            <input type="text" name="nom" id="nom" size="50"><br>
+            <span class="msg-err" id="errNom"></span>
+          </div>
+          <div>
+            <label for="prenom">Veuillez entrer votre prénom:</label><br>
+            <input type="text" name="prenom" id="prenom" size="50"><br>
+            <span class="msg-err" id="errPrenom"></span>
+          </div>
+          <div>
+            <label for="description">Veuillez entrer votre plainte:</label><br>
+            <textarea name="description" id="description" rows="7" cols="70"></textarea><br>
+            <span class="msg-err" id="errDescription"></span>
+          </div>
+          <div class="d-flex justify-content-center">
+            <input type="submit" value="ENVOYER">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/script.js"></script>
+{% endblock %}

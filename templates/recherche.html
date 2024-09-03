@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="second-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="top-text header-text">
+          <h2>EFFECTUEZ UNE AUTRE RECHERCHE</h2>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <form class="search-form d-flex justify-content-between" action="/search" method="post">
+          <div class="col-lg-10">
+            <input type="text" placeholder="Rechercher par nom, propriétaire ou rue.." name="larecherche">
+          </div>
+          <div class="col-lg-2">
+            <button type="submit">Rechercher</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="info-resultat">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        {% if violations %}
+        {% for violation in violations %}
+        <h2>{{ violation["etablissement"] }}</h2>
+        <h3>Informations sur la violation</h3>
+        <p>
+          Date: {{ violation["date"] }} <br>
+          Description: {{ violation["description"] }} <br>
+          Adresse: {{ violation["adresse"] }}<br>
+          Date de jugement: {{ violation["date_jugement"] }}<br>
+          Établissement: {{ violation["etablissement"] }} <br>
+          Montant: {{ violation["montant"] }}$<br>
+          Propriétaire: {{ violation["proprietaire"] }}<br>
+          Ville: {{ violation["ville"] }}<br>
+          Statut: {{ violation["statut"] }}<br>
+          Date du statut: {{ violation["date_statut"] }}<br>
+          Categorie: {{ violation["categorie"] }}
+        </p>
+        {% endfor %}
+        {% else %}
+        <h2>AUCUN RÉSULTAT</h2>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
