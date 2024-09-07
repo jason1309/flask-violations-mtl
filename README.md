@@ -1,6 +1,17 @@
 # Projet Infractions Restaurant Montréal
 Développement d'une application web visant à recueillir des données ouvertes de la ville de Montréal concernant les établissements ayant reçu des constats d'infraction lors des inspections alimentaires. L'objectif est d'exploiter ces informations pour fournir divers services aux utilisateurs
 
+Projet réalisé au cours de la session d'hiver 2023 pour le cours INF5190 - Programmation web avancée à l'UQAM.
+
+## Démonstration
+https://github.com/user-attachments/assets/a69faf0e-30ff-4355-beea-d678da3647e6
+
+## Table des matières
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies Utilisées](#technologies-utilisées)
+- [Installation](#installation)
+- [Contributeur](#contributeur)
+
 ## Fonctionnalités
 
 - Importation et traitement des données depuis des fichiers CSV disponible sur le site de la ville de Montréal.
@@ -20,23 +31,28 @@ Développement d'une application web visant à recueillir des données ouvertes 
 1. **Cloner le dépôt** :
    ```bash
    git clone https://github.com/jason1309/flask-violations-mtl.git
-
+   cd flask-violations-mtl
    ```
-2. **Accéder au répertoire du projet**
-    ```bash
-    cd flask-violations-mtl
-    ```
 
-3. **Créer un environnement virtuel, l'activer et installer les dépendances**
+2. **Créer un environnement virtuel, l'activer et installer les dépendances**
+   ##### macOS et Linux
     ```bash
-    python -m venv venv
+    python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
     ```
-
+   ##### Windows
+   ```bash
+   python -m venv venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 4. **Démarrer l'application**
     ```bash
     make run
     ```
 
-Pour accéder à l'application, allez sur http://127.0.0.1:5000
+Pour accéder à l'application, allez sur http://127.0.0.1:5000.
+
+## Contributeur
+- [Gagné, Jason](https://www.linkedin.com/in/jason-gagn%C3%A9-839032246/)
