@@ -4,7 +4,7 @@ Développement d'une application web visant à recueillir des données ouvertes 
 Projet réalisé au cours de la session d'hiver 2023 pour le cours INF5190 - Programmation web avancée à l'UQAM.
 
 ## Démonstration
-https://github.com/user-attachments/assets/a69faf0e-30ff-4355-beea-d678da3647e6
+https://github.com/user-attachments/assets/1211f791-faff-4c1c-8796-e32096937558
 
 ## Table des matières
 - [Fonctionnalités](#fonctionnalités)
@@ -19,6 +19,7 @@ https://github.com/user-attachments/assets/a69faf0e-30ff-4355-beea-d678da3647e6
 - Recherche d'infractions par intervalle de dates.
 - Filtrage par liste déroulante permettant d'afficher les différentes infractions d'un restaurant.
 - Soumission de plaintes avec validation des entrées en JavaScript et côté serveur.
+- BackgroundScheduler permettant une mise à jour de la base de donnée à chaque intervalle de 24 heures.
 
 ## Technologies Utilisées
 
