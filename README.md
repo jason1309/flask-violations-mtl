@@ -48,7 +48,7 @@ https://github.com/user-attachments/assets/1211f791-faff-4c1c-8796-e32096937558
    .venv\Scripts\activate
    pip install -r requirements.txt
    ```
-4. **Démarrer l'application**
+3. **Démarrer l'application**
     ```bash
     make run
     ```
